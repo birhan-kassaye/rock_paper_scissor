@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <script>
+            function getComputerChoice(max) {
+                return Math.floor(Math.random() * max);
+            }
+
+            function getHumanChoice() {
+                let cho = prompt("Enter the input: ");
+                return cho;
+            }
+
+            const humanScore = 0;
+            const computerScore = 0;
+
+            function playRound(humanChoice, computerChoice) {
+                if (humanChoice == "Rock" && computerChoice == 0) {
+                    console.log("Both human and computer draw.")
+                } else if (humanChoice == "Paper" && computerChoice == 0) {
+                    console.log("You won! Paper beats Rock.")
+                } else if (humanChoice == "Scissor" && computerChoice == 0) {
+                    console.log("You lose! Rock beats Scissor.")
+                } else if (humanChoice == "Rock" && computerChoice == 1) {
+                    console.log("You lose! Paper beats Rock.")
+                } else if (humanChoice ==  "Paper" && computerChoice == 1) {
+                    console.log("Both human and computer draw.")
+                } else if (humanChoice == "Scissor" && computerChoice == 1) {
+                    console.log("You won! Scissor beats Paper.")
+                } else if (humanChoice == "Rock" && computerChoice == 2) {
+                    console.log("You won! Rock beats Scissor.")
+                } else if (humanChoice == "Paper" && computerChoice == 2) {
+                    console.log("You lose! Scissor beats Paper")
+                } else if (humanChoice ==  "Scissor" && computerChoice == 2) {
+                    console.log("Both human and computer draw.")
+                }
+            }
+
+            let computerSelection = getComputerChoice(3);
+            let humanSelection = getHumanChoice();
+
+            let gameResult = playRound(humanSelection, computerSelection);
+            console.log(`Computer: ${computerSelection}`);
+            console.log(`Human: ${humanSelection}`);
+            console.log(gameResult);
+        </script>
+    </body>
+</html>
