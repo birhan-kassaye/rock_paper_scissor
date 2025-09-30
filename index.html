@@ -6,7 +6,9 @@
     </head>
 
     <body>
-        <h1>Hi, there!</h1>
+        <h1>Hi, there!<br></h1>
+        <div id="results"></div>
+        <div id="score"></div>
         <script>
             function getComputerChoice() {
                 let randomNUmber = Math.floor(Math.random() * 3);
@@ -18,18 +20,13 @@
                     return "Scissor";
                 }
             }
-
             function getHumanChoice() {
-                return prompt("Enter your response: ")
+                let humanValue = prompt("Enter your choice: ").toString();
+                return humanValue;
             }
 
-            
-            function playGame() {
-                let humanScore = 0;
-                let computerScore = 0;
-            
 
-                function playRound(humanChoice, computerChoice) {
+            function playRound(humanChoice, computerChoice) {
                     if (humanChoice === "Rock" && computerChoice === "Rock") {
                         return "Draw"
                     } else if (humanChoice === "Rock" && computerChoice === "Paper") {
@@ -51,35 +48,36 @@
                     }
                 }
 
+            
+            function playGame() {
+                let humanScore = 0;
+                let computerScore = 0;
 
-                let humanSelection;
-                let computerSelection;
 
-                
-                console.log(humanSelection)
-                console.log(computerSelection)
-                 
                 for (let i = 0; i < 5; i++) {
-                    humanSelection = getHumanChoice();
-                    computerSelection = getComputerChoice(); 
-                    let result = playRound(humanSelection, computerSelection).toString()
-                
-                    console.log(result)
+                    const humanSelection = getHumanChoice();
+                    console.log(humanSelection);
+                    const computerSelection = getComputerChoice();
+                    const result = playRound(humanSelection, computerSelection);
+                    console.log(result);
+
                     if (result.includes("won")) {
-                        humanScore += 1;
+                        humanScore++;
+                        console.log(humanScore)
                     } else if (result.includes("lose")) {
-                        computerScore += 1;
+                        computerScore++;
+                        console.log(computerScore);
                     } else if (result.includes("Draw")) {
                         i--;
                     }
-                                
-                }
-                if (humanScore == 3) {
-                    console.log("Congratulation! You won!")
-                } else if (computerScore == 3) {
-                    console.log("You loss and the computer won!")
-                }
 
+                    if (humanScore === 3) {
+                        console.log("🎉 Congratulations! You won the game!");
+                    } else if (computerScore === 3) {
+                        console.log("💻 The computer won the game!");
+                    }
+                }
+                    
             }
 
             playGame()
