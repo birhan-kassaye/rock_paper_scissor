@@ -7,8 +7,7 @@
 
     <body>
         <h1>Hi, there!<br></h1>
-        <div id="results"></div>
-        <div id="score"></div>
+        
         <script>
             function getComputerChoice() {
                 let randomNUmber = Math.floor(Math.random() * 3);
@@ -56,25 +55,24 @@
 
                 for (let i = 0; i < 5; i++) {
                     const humanSelection = getHumanChoice();
-                    console.log(humanSelection);
                     const computerSelection = getComputerChoice();
                     const result = playRound(humanSelection, computerSelection);
-                    console.log(result);
+                    console.log(result)
 
                     if (result.includes("won")) {
                         humanScore++;
-                        console.log(humanScore)
                     } else if (result.includes("lose")) {
                         computerScore++;
-                        console.log(computerScore);
                     } else if (result.includes("Draw")) {
                         i--;
                     }
 
                     if (humanScore === 3) {
                         console.log("🎉 Congratulations! You won the game!");
+                        break
                     } else if (computerScore === 3) {
                         console.log("💻 The computer won the game!");
+                        break
                     }
                 }
                     
