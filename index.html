@@ -3,10 +3,19 @@
 <html>
     <head>
         <title>Rock_Paper_Scissor</title>
+        <style>
+            button {
+                padding: 10px 20px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+        </style>
     </head>
 
     <body>
         <h1>Hi, there!<br></h1>
+        <div id="result"></div>
+        <div id="score"></div>
         
         <script>
             function getComputerChoice() {
@@ -18,10 +27,6 @@
                 } else if (randomNUmber === 2) {
                     return "Scissor";
                 }
-            }
-            function getHumanChoice() {
-                let humanValue = prompt("Enter your choice: ").toString();
-                return humanValue;
             }
 
 
@@ -49,35 +54,47 @@
 
             
             function playGame() {
-                let humanScore = 0;
+                let playerScore = 0;
                 let computerScore = 0;
 
+                ["Rock", "Paper", "Scissor"].forEach(choice => {
+                    const bodyDiv = document.querySelector("body");
+                    const btn = document.createElement("button");
+                    btn.innerText = choice;
+                    btn.value = choice;
+                    bodyDiv.appendChild(btn);
 
-                for (let i = 0; i < 5; i++) {
-                    const humanSelection = getHumanChoice();
-                    const computerSelection = getComputerChoice();
-                    const result = playRound(humanSelection, computerSelection);
-                    console.log(result)
+                    btn.addEventListener("click", ()=> {
+                        const playerSelection = btn.value;
+                        const computerSelection = getComputerChoice();
+                        const result = playRound(playerSelection, computerSelection);
+                        const divScore = document.querySelector("#score");
+                        const divResult = document.querySelector("#result");
+                        
+                        if (result.includes("won")) {
+                            playerScore++;
+                        } else if (result.includes("lose")) {
+                            computerScore++;
+                        }
+                        divResult.textContent = `You chose: ${playerSelection}, Computer chose: ${computerSelection} & results: ${result}`
+                        divScore.textContent = `Player Score: ${playerScore}, Computer Score: ${computerScore}`;                      
 
-                    if (result.includes("won")) {
-                        humanScore++;
-                    } else if (result.includes("lose")) {
-                        computerScore++;
-                    } else if (result.includes("Draw")) {
-                        i--;
+                        if (playerScore === 5) {
+                            divResult.textContent = "🎉 Congratulations! You won the game!";
+                            disableButton();
+                        } else if (computerScore === 5) {
+                            divResult.textContent = "💻 The computer won the game!";
+                            disableButton();
+                        }
+                    })
+                    function disableButton() {
+                        document.querySelectorAll("button").forEach(button => {
+                            button.disabled = true;
+                        })
                     }
-
-                    if (humanScore === 3) {
-                        console.log("🎉 Congratulations! You won the game!");
-                        break
-                    } else if (computerScore === 3) {
-                        console.log("💻 The computer won the game!");
-                        break
-                    }
-                }
-                    
+                })   
             }
-
+                    
             playGame()
 
         </script>
